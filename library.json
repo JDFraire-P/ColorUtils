@@ -1,0 +1,19 @@
+{
+  "name": "ColorsUtils",
+  "version": "1.0.2",
+  "description": "A utility library for working with colors in Arduino projects.",
+  "keywords": ["colors", "Arduino", "utility"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JDFraire-P/ColorsUtils.git"
+  },
+  "authors": [
+    {
+      "name": "Jose Daniel Fraire Perez",
+      "email": "JDFraire.P@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "frameworks": "Arduino",
+  "platforms": "atmelmegaavr"
+}

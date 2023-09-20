@@ -6,7 +6,7 @@
 
 **Date:** 2023-08-31
 
-**Version:** 1.0
+**Version:** 1.0.2
 
 ## Introduction
 
