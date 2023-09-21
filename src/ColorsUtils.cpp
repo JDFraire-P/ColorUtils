@@ -1,6 +1,6 @@
-// JDFraire_ColorsUtils.cpp
+// ColorsUtils.cpp
 
-// Creator: JDFraire
+// Creator: JDFraire-P
 
 // Description: Colors utilities library, add color types and conversion functions
 

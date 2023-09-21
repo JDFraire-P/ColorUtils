@@ -1,13 +1,13 @@
-#include <JDFraire_ColorsUtils.h>
+#include <ColorsUtils.h>
 
 // Definimos algunos colores RGB888
-rgb888_t red888 = {255, 0, 0, "Red"};
-rgb888_t green888 = {0, 255, 0, "Green"};
-rgb888_t blue888 = {0, 0, 255, "Blue"};
+rgb888_t red888 =   {"Red",   255, 0, 0};
+rgb888_t green888 = {"Green", 0, 255, 0};
+rgb888_t blue888 =  {"Blue",  0, 0, 255};
 
 // Definimos algunos colores RGB565
-rgb565_t yellow565 = {31, 63, 0, "Yellow"};
-rgb565_t purple565 = {31, 0, 31, "Purple"};
+rgb565_t yellow565 = {"Yellow", 31, 63, 0};
+rgb565_t purple565 = {"Purple", 31, 0, 31};
 
 void setup() {
   Serial.begin(9600);
@@ -55,6 +55,13 @@ void loop() {
 }
 
 void printColor(rgb888_t color) {
+  Serial.print("Name: " + String(color.name));
+  Serial.print(", Red: " + String(color.red));
+  Serial.print(", Green: " + String(color.green));
+  Serial.println(", Blue: " + String(color.blue));
+}
+
+void printColor(rgb565_t color) {
   Serial.print("Name: " + String(color.name));
   Serial.print(", Red: " + String(color.red));
   Serial.print(", Green: " + String(color.green));

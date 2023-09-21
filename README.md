@@ -1,43 +1,16 @@
-# JDFraire_ColorsUtils Library
+# ColorsUtils Library
 
-**Creator:** JDFraire
+**Creator:** JDFraire-P
 
 **Description:** Colors utilities library that adds color types and conversion functions.
 
 **Date:** 2023-08-31
 
-**Version:** 1.0.2
+**Version:** 1.0.3
 
 ## Introduction
 
-The JDFraire_ColorsUtils library is a utility library for Arduino that provides color-related functionalities. It introduces two custom color types, `rgb888_t` and `rgb565_t`, along with conversion functions between these types and standard color formats. Additionally, the library includes functions for comparing colors and a list of named colors.
-
-## Order of Components
-
-The library operates on 24-bit RGB888 and 16-bit RGB565 color representations. Here's the order of components in these formats:
-
-**RGB888:**
-1. Red
-2. Green
-3. Blue
-
-**RGB565:**
-1. Red
-2. Red
-3. Red
-4. Red
-5. Red
-6. Green
-7. Green
-8. Green
-9. Green
-10. Green
-11. Green
-12. Blue
-13. Blue
-14. Blue
-15. Blue
-16. Blue
+The ColorsUtils library is a utility library for Arduino that provides color-related functionalities. It introduces two custom color types, `rgb888_t` and `rgb565_t`, along with conversion functions between these types and standard color formats. Additionally, the library includes functions for comparing colors and a list of named colors.
 
 ## Color Conversion Functions
 
@@ -79,16 +52,13 @@ The library operates on 24-bit RGB888 and 16-bit RGB565 color representations. H
 - `float color_similarity(rgb888_t rgb888, rgb565_t rgb565)`: Compares RGB888 with RGB565.
 - `float color_similarity(rgb565_t rgb565, rgb888_t rgb888)`: Compares RGB565 with RGB888.
 
-### Named Colors List
-
-- `extern const rgb888_t COLORS[]`: A list of named RGB888 colors.
-
 ### Color List Functions
 
 - `rgb888_t get_color_by_name(const char* name, const rgb888_t* colors_list)`: Get a color by name from the list.
 - `rgb888_t get_color_by_hex(int hex_color_code, const rgb888_t* colors_list)`: Get a color by hex color code from the list.
 - `rgb888_t get_similar_color888(rgb888_t rgb888, const rgb888_t* colors_list)`: Get the most similar RGB888 color from the list.
 - `rgb565_t get_similar_color565(rgb565_t rgb565, const rgb888_t colors_list[])`: Get the most similar RGB565 color from the list.
+
 
 ## Named Colors List
 
