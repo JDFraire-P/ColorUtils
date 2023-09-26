@@ -8,34 +8,6 @@
 
 // Version: 1.0
 
-/*  Order of components
-bit   rgb888_t    rgb565_t
-  1   blue        blue
-  2   blue        blue
-  3   blue        blue
-  4   blue        blue
-  5   blue        blue
-  6   blue        green
-  7   blue        green
-  8   blue        green
-  9   green       green
-  10  green       green
-  11  green       green
-  12  green       red
-  13  green       red
-  14  green       red
-  15  green       red
-  16  green       red
-  17  red
-  18  red
-  19  red
-  20  red
-  21  red
-  22  red
-  23  red
-  24  red
-*/
-
 /*  Convert 24-bit RGB888 to 16-bit RGB565
 1. First, extract the red, green, and blue components of the 24-bit RGB888 color value. Each component is an integer between 0 and 255.
 2. Next, convert each component to a 5 or 6-bit value, depending on whether it corresponds to the red or blue channel (5-bit) or the green channel (6-bit). To do this, divide each component by the maximum possible value in the source format (255) and then multiply the result by the maximum value for that channel in the target format (31 for red and blue, 63 for green).
@@ -58,7 +30,6 @@ bit   rgb888_t    rgb565_t
 
 // Libraries
 #include <Arduino.h>
-
 
 /* COLORS STRUCTS */
 
@@ -89,11 +60,11 @@ struct rgb888_t{
 // 16-bit RGB565 color type
 struct rgb565_t{
   uint16_t value; // 16 bits
+  String name; // Color name (if is provided)
+
   uint8_t red; // 5 bits
   uint8_t green; // 6 bits
   uint8_t blue; // 5 bits
-
-  String name; // Color name (if is provided)
 
   // default constructor
   rgb565_t();
@@ -134,9 +105,6 @@ float color_similarity(rgb888_t rgb888, rgb565_t rgb565);
 // Compare 24-bit RGB888 and 16-bit RGB565 colors
 float color_similarity(rgb565_t rgb565, rgb888_t rgb888);
 
-/* NAMED COLORS LIST */
-extern const rgb888_t COLORS[];
-
 /* COLOR LIST FUNCTIONS */
 
 // Get color from color list by name
@@ -151,4 +119,6 @@ rgb888_t get_similar_color888(rgb888_t rgb888, const rgb888_t* colors_list);
 // Get most similar color from color list
 rgb565_t get_similar_color565(rgb565_t rgb565, const rgb888_t colors_list[]);
 
+/* NAMED COLORS LIST */
+extern const rgb888_t COLORS[];
 #endif
