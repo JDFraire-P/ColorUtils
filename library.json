@@ -1,6 +1,6 @@
 {
   "name": "ColorsUtils",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "A utility library for working with colors in Arduino projects.",
   "keywords": ["colors", "Arduino", "utility"],
   "repository": {
@@ -9,11 +9,11 @@
   },
   "authors": [
     {
-      "name": "Jose Daniel Fraire Perez",
+      "name": "J. D. Fraire",
       "email": "JDFraire.P@gmail.com"
     }
   ],
   "license": "MIT",
   "frameworks": "Arduino",
-  "platforms": "atmelmegaavr"
+  "platforms": "*"
 }

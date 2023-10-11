@@ -1,76 +1,85 @@
 # ColorsUtils Library
 
-**Creator:** JDFraire-P
+![Arduino](https://img.shields.io/badge/Arduino-Compatible-brightgreen.svg)
 
-**Description:** Colors utilities library that adds color types and conversion functions.
+## Description
 
-**Date:** 2023-08-31
+The ColorsUtils library is a utility library for Arduino that provides functions for working with RGB colors in both RGB888 and RGB565 formats. It allows you to convert between these formats, compare colors for similarity, and find the closest matching color from a list. This can be useful in various projects where you need to work with colors, such as LED control, display applications, and more.
 
-**Version:** 1.0.3
+## Features
 
-## Introduction
+- Conversion between RGB888 and RGB565 color formats.
+- Color comparison to measure similarity between two colors.
+- Finding the closest matching color from a list.
+- Support for common web colors.
 
-The ColorsUtils library is a utility library for Arduino that provides color-related functionalities. It introduces two custom color types, `rgb888_t` and `rgb565_t`, along with conversion functions between these types and standard color formats. Additionally, the library includes functions for comparing colors and a list of named colors.
+## Installation
 
-## Color Conversion Functions
+To use the ColorsUtils library in your Arduino project, follow these steps:
 
-### Convert 24-bit RGB888 to 16-bit RGB565
-
-1. Extract the red, green, and blue components of the 24-bit RGB888 color value, each ranging from 0 to 255.
-2. Convert each component to a 5 or 6-bit value, depending on whether it corresponds to the red or blue channel (5-bit) or the green channel (6-bit). To do this, divide each component by 255 and then multiply by the maximum value for that channel in the target format (31 for red and blue, 63 for green).
-3. Shift the 5-bit red value to the left by 11 bits to make room for the green and blue values (totaling 11 bits).
-4. Shift the 6-bit green value to the left by 5 bits to make room for the blue value (5 bits).
-5. The blue value does not need to be shifted as it will occupy the lower 5 bits of the RGB565 value.
-6. Concatenate the red, green, and blue values to create the 16-bit RGB565 color value.
-
-### Convert 16-bit RGB565 to 24-bit RGB888
-
-1. Extract the red, green, and blue components of the 16-bit RGB565 color value, each ranging from 0 to 31 (red and blue) or 0 to 63 (green).
-2. To extract the red component, shift the 16-bit RGB565 value to the right by 11 bits.
-3. To extract the green component, shift the 16-bit RGB565 value to the right by 5 bits, then mask the result with 0b111111 (63) to keep only the lower 6 bits.
-4. To extract the blue component, mask the 16-bit RGB565 value with 0b11111 (31) to keep only the lower 5 bits.
-5. Convert each component to an 8-bit value by dividing by the maximum possible value in the source format and then multiplying by 255.
+1. Download the library ZIP file from the [GitHub repository](https://github.com/JDFraire-P/ColorsUtils).
+2. Open the Arduino IDE.
+3. Go to "Sketch" -> "Include Library" -> "Add .ZIP Library...".
+4. Select the downloaded ZIP file.
+5. The library is now installed and ready for use in your project.
 
 ## Usage
 
-### Color Structs
+### Creating RGB Colors
 
-- `rgb888_t`: Represents a 24-bit RGB color with red, green, blue components, and a name (optional).
-- `rgb565_t`: Represents a 16-bit RGB color with red, green, blue components, and a name (optional).
+You can create RGB colors in both RGB888 and RGB565 formats using the `RGB888` and `RGB565` classes. Here's how to create them:
 
-### Color Conversion Functions
+```cpp
+RGB888 redColor888(255, 0, 0); // Create an RGB888 color (Red)
+RGB888 blueColor888(0x0000FF);  // Create an RGB888 color (blue)
+RGB565 redColor565(0xF800);    // Create an RGB565 color (Red)
+RGB565 blueColor565(0, 0, 31);  // Create an RGB565 color (blue)
+```
 
-- `rgb565_t rgb888_to_rgb565(rgb888_t rgb888)`: Converts RGB888 to RGB565.
-- `rgb888_t rgb565_to_rgb888(rgb565_t rgb565)`: Converts RGB565 to RGB888.
-- `String rgb888_to_String(rgb888_t rgb888)`: Converts RGB888 to a hex color code string.
-- `String rgb565_to_String(rgb565_t rgb565)`: Converts RGB565 to a hex color code string.
+# Color Conversion
 
-### Compare Colors Functions
+You can convert between RGB888 and RGB565 formats using the `toRGB888` and `toRGB565` functions:
 
-- `float color_similarity(rgb888_t rgb888_1, rgb888_t rgb888_2)`: Compares two RGB888 colors.
-- `float color_similarity(rgb565_t rgb565_1, rgb565_t rgb565_2)`: Compares two RGB565 colors.
-- `float color_similarity(rgb888_t rgb888, rgb565_t rgb565)`: Compares RGB888 with RGB565.
-- `float color_similarity(rgb565_t rgb565, rgb888_t rgb888)`: Compares RGB565 with RGB888.
+```cpp
+RGB888 convertedColor = toRGB888(redColor565); // Convert RGB565 to RGB888
+RGB565 convertedColor = toRGB565(blueColor888); // Convert RGB888 to RGB565
+```
 
-### Color List Functions
+## Color Comparison
 
-- `rgb888_t get_color_by_name(const char* name, const rgb888_t* colors_list)`: Get a color by name from the list.
-- `rgb888_t get_color_by_hex(int hex_color_code, const rgb888_t* colors_list)`: Get a color by hex color code from the list.
-- `rgb888_t get_similar_color888(rgb888_t rgb888, const rgb888_t* colors_list)`: Get the most similar RGB888 color from the list.
-- `rgb565_t get_similar_color565(rgb565_t rgb565, const rgb888_t colors_list[])`: Get the most similar RGB565 color from the list.
+You can measure the similarity between two RGB colors using the `compare` function, which returns a similarity value between 0 (not similar) and 1 (identical):
 
+```cpp
+float similarity = redColor888.compare(blueColor888); // Compare two RGB888 colors
+```
 
-## Named Colors List
+## Web Colors
 
-The library includes a list of named colors with their corresponding RGB888 values.
+The library includes a predefined list of 50 common web colors, which you can find in the `WebColors.h` file.
+
+## Finding Closest Color
+
+You can find the closest matching color to a target color from a list of colors using the `getClosest` function:
+
+```cpp
+RGB888 closestColor = targetColor.getClosest(colorList, listSize); // Find the closest color
+```
 
 ## Examples
 
-Examples and usage can be found in the Arduino sketch provided with the library.
+For detailed usage examples and more information, refer to the [Examples](Examples/) directory in this repository.
 
 ## License
 
-This library is released under the [MIT License](LICENSE).
+This library is open-source software licensed under the [MIT License](LICENSE.md).
 
----
-© 2023 JDFraire
+## Credits
+
+- Created by [Your Name](https://github.com/yourusername)
+- Inspired by Arduino and the open-source community.
+
+If you find this library useful, consider giving it a star on [GitHub](https://github.com/yourrepository/ColorsUtils) and contributing to its development.
+
+For bug reports, feature requests, and contributions, please use the [GitHub Issues](https://github.com/yourrepository/ColorsUtils/issues) page.
+
+Happy coding!
